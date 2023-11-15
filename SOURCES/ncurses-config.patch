@@ -1,0 +1,32 @@
+diff -up ncurses-6.1-20180127/misc/ncurses-config.in.config ncurses-6.1-20180127/misc/ncurses-config.in
+--- ncurses-6.1-20180127/misc/ncurses-config.in.config	2017-12-09 23:45:44.000000000 +0100
++++ ncurses-6.1-20180127/misc/ncurses-config.in	2018-01-29 10:57:48.596590822 +0100
+@@ -40,7 +40,6 @@ exec_prefix="@exec_prefix@"
+ 
+ bindir="@bindir@"
+ includedir="@includedir@"
+-libdir="@libdir@"
+ datarootdir="@datarootdir@"
+ datadir="@datadir@"
+ mandir="@mandir@"
+@@ -111,12 +110,7 @@ while test $# -gt 0; do
+ ENDECHO
+ 		;;
+ 	--libs)
+-		if test "$libdir" = /usr/lib
+-		then
+ 			LIBDIR=
+-		else
+-			LIBDIR=-L$libdir
+-		fi
+ 		if test @TINFO_NAME@ = @LIB_NAME@ ; then
+ 		sed -e 's,^[ ]*,,' -e 's, [ ]*, ,g' -e 's,[ ]*$,,' <<-ENDECHO
+ 			$LIBDIR @EXTRA_LDFLAGS@ -l${THIS} @LIBS@
+@@ -154,7 +148,6 @@ ENDECHO
+ 		echo $INCS
+ 		;;
+ 	--libdir)
+-		echo "${libdir}"
+ 		;;
+ 	--mandir)
+ 		echo "${mandir}"
