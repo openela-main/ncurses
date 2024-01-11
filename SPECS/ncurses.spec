@@ -2,7 +2,7 @@
 Summary: Ncurses support utilities
 Name: ncurses
 Version: 6.2
-Release: 8.%{revision}%{?dist}
+Release: 10.%{revision}%{?dist}
 License: MIT
 URL: https://invisible-island.net/ncurses/ncurses.html
 Source0: https://invisible-mirror.net/archives/ncurses/current/ncurses-%{version}-%{revision}.tgz
@@ -13,6 +13,8 @@ Patch8: ncurses-config.patch
 Patch9: ncurses-libs.patch
 Patch11: ncurses-urxvt.patch
 Patch12: ncurses-kbs.patch
+Patch13: ncurses-cve-2023-29491.patch
+Patch14: ncurses-setuid.patch
 BuildRequires: gcc gcc-c++ gpm-devel gnupg2 make pkgconfig
 
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
@@ -114,6 +116,8 @@ The ncurses-static package includes static libraries of the ncurses library.
 %patch9 -p1 -b .libs
 %patch11 -p1 -b .urxvt
 %patch12 -p1 -b .kbs
+%patch13 -p1 -b .cve-2023-29491
+%patch14 -p1 -b .setuid
 
 for f in ANNOUNCE; do
     iconv -f iso8859-1 -t utf8 -o ${f}{_,} &&
@@ -127,6 +131,7 @@ common_options="\
     --enable-overwrite \
     --enable-pc-files \
     --enable-xmc-glitch \
+    --disable-setuid-environ \
     --disable-stripping \
     --disable-wattr-macros \
     --with-cxx-shared \
@@ -281,6 +286,13 @@ xz NEWS
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Aug 21 2023 Miroslav Lichvar <mlichvar@redhat.com> 6.2-10.20210508
+- ignore TERMINFO and HOME only if setuid/setgid/capability (#2211666)
+
+* Mon Aug 14 2023 Miroslav Lichvar <mlichvar@redhat.com> 6.2-9.20210508
+- fix buffer overflow on terminfo with too many capabilities (CVE-2023-29491)
+- ignore TERMINFO and HOME environment variables if running as root (#2211666)
+
 * Mon Aug 09 2021 Mohan Boddu <mboddu@redhat.com> - 6.2-8.20210508
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
