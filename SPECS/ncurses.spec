@@ -2,7 +2,7 @@
 Summary: Ncurses support utilities
 Name: ncurses
 Version: 6.1
-Release: 9.%{revision}%{?dist}.1
+Release: 10.%{revision}%{?dist}
 License: MIT
 Group: System Environment/Base
 URL: https://invisible-island.net/ncurses/ncurses.html
@@ -301,7 +301,7 @@ bzip2 NEWS
 %{_libdir}/lib*.a
 
 %changelog
-* Tue Aug 15 2023 Miroslav Lichvar <mlichvar@redhat.com> 6.1-9.20180224.el8_8.1
+* Tue Aug 15 2023 Miroslav Lichvar <mlichvar@redhat.com> 6.1-10.20180224
 - fix buffer overflow on terminfo with too many capabilities (CVE-2023-29491)
 
 * Tue May 18 2021 Miroslav Lichvar <mlichvar@redhat.com> 6.1-9.20180224
