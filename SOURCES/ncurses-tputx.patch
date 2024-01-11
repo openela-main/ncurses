@@ -1,0 +1,15 @@
+From snapshot 6.1-20180630
+
+diff --git a/progs/tput.c b/progs/tput.c
+index fd051eb4..88e75799 100644
+--- a/progs/tput.c
++++ b/progs/tput.c
+@@ -293,7 +293,7 @@ main(int argc, char **argv)
+ 
+     term = getenv("TERM");
+ 
+-    while ((c = getopt(argc, argv, "ST:V")) != -1) {
++    while ((c = getopt(argc, argv, "ST:Vx")) != -1) {
+ 	switch (c) {
+ 	case 'S':
+ 	    cmdline = FALSE;
